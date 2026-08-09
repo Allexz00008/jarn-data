@@ -443,11 +443,11 @@
   "rest": 150,
   "bw": 20
  },
- "view": "hist",
+ "view": "train",
  "meta": {
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786286791012,
+ "ts": 1786287076051,
  "del": []
 }
