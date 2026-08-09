@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#101318">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>JÄRN — träningslogg</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23101318'/><rect x='3' y='13' width='26' height='6' fill='%23d9434f'/></svg>">
+<style>
+:root{
+  --bg:#101318; --panel:#1a1f27; --panel2:#212832; --line:#2a3140; --line2:#3a4354;
+  --ink:#eceef2; --dim:#8b94a4; --dim2:#5f6878;
+  --red:#d9434f; --amber:#e0a53c; --green:#46a86c; --blue:#3d7ee6;
+  --p25:#c8102e; --p20:#1f5fc4; --p15:#e6b422; --p10:#2e8b45; --p5:#e8eaee; --p2:#0d0f12; --p1:#8b94a4;
+  --r:10px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  padding-bottom:calc(72px + env(safe-area-inset-bottom));
+  overscroll-behavior-y:none;
+}
+#app{max-width:520px;margin:0 auto;padding:0 14px}
+button,input,select,textarea{font-family:inherit;font-size:16px;color:inherit}
+button{cursor:pointer;border:0;background:none}
+input,textarea,select{
+  background:var(--panel2);border:1px solid var(--line);border-radius:8px;
+  padding:10px;color:var(--ink);width:100%;
+}
+input:focus,textarea:focus,select:focus,button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+
+/* --- header --- */
+header{
+  position:sticky;top:0;z-index:30;background:rgba(16,19,24,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  margin:0 -14px 14px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;
+  display:flex;align-items:center;gap:10px;
+}
+.brand{font-weight:800;letter-spacing:.22em;font-size:14px;text-transform:uppercase}
+.brand i{display:inline-block;width:20px;height:5px;background:var(--red);border-radius:1px;vertical-align:middle;margin-right:8px}
+.savedot{margin-left:auto;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--green);
+  display:inline-flex;align-items:center;gap:6px}
+.savedot:before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green)}
+.savedot.busy{color:var(--dim2)} .savedot.busy:before{background:var(--amber)}
+.hbtn{color:var(--dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:6px 10px;border:1px solid var(--line);border-radius:7px}
+
+/* --- type --- */
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:700;margin:22px 0 10px}
+h3{font-size:17px;margin:0;font-weight:700;letter-spacing:-.01em}
+.sub{color:var(--dim);font-size:13px}
+.tiny{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim2);font-weight:700}
+
+/* --- cards --- */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:10px}
+.row{display:flex;align-items:center;gap:10px}
+.between{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.grow{flex:1;min-width:0}
+.trunc{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* --- buttons --- */
+.btn{background:var(--panel2);border:1px solid var(--line2);border-radius:8px;padding:11px 14px;font-weight:700;font-size:14px;text-align:center}
+.btn.pri{background:var(--red);border-color:var(--red);color:#fff}
+.btn.ghost{background:none;border-color:var(--line)}
+.btn.sm{padding:7px 10px;font-size:13px}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.4}
+
+/* --- routine cards --- */
+.rcard{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:10px}
+.rcard .tag{width:42px;height:42px;flex:none;border-radius:8px;background:var(--panel2);border:1px solid var(--line2);
+  display:grid;place-items:center;font-weight:800;font-size:15px;letter-spacing:-.02em}
+.rcard.due .tag{background:var(--red);border-color:var(--red);color:#fff}
+
+/* --- set logging --- */
+.exhead{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
+.ghost{color:var(--dim2);font-size:12px}
+.setrow{display:grid;grid-template-columns:22px 1fr 1fr 46px;gap:7px;align-items:center;margin-top:7px}
+.setrow .idx{font-size:12px;font-weight:800;color:var(--dim2);text-align:center}
+.setrow input{padding:11px 8px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.setrow .ck{height:44px;border-radius:8px;border:1px solid var(--line2);background:var(--panel2);font-size:17px;color:var(--dim)}
+.setrow.done input{background:rgba(70,168,108,.10);border-color:rgba(70,168,108,.45);color:#a8e0c0}
+.setrow.done .ck{background:var(--green);border-color:var(--green);color:#08120c}
+.unitrow{display:grid;grid-template-columns:22px 1fr 1fr 46px;gap:7px;margin-top:8px}
+.unitrow span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim2);font-weight:700;text-align:center}
+
+/* --- plate loader (signature) --- */
+.bar{display:flex;align-items:center;gap:2px;height:26px;margin-top:10px;padding-left:2px}
+.bar .sleeve{width:34px;height:4px;background:var(--line2);border-radius:2px;flex:none}
+.plate{width:9px;border-radius:2px;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.45)}
+.bar .lbl{font-size:11px;color:var(--dim2);margin-left:8px;font-weight:700;letter-spacing:.04em;white-space:nowrap}
+
+/* --- flags --- */
+.flag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;padding:5px 9px;border-radius:6px;margin-top:10px}
+.flag.up{background:rgba(224,165,60,.14);color:var(--amber);border:1px solid rgba(224,165,60,.35)}
+.flag.pr{background:rgba(217,67,79,.14);color:#ff8b93;border:1px solid rgba(217,67,79,.35)}
+.pill{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+  border:1px solid var(--line);border-radius:5px;padding:3px 6px}
+
+/* --- nav --- */
+nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(16,19,24,.96);
+  backdrop-filter:blur(10px);border-top:1px solid var(--line);
+  display:flex;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;padding:11px 4px 12px;color:var(--dim2);display:flex;flex-direction:column;align-items:center;gap:4px}
+nav button.on{color:var(--ink)}
+nav button.on .ic{background:var(--red)}
+nav .ic{width:18px;height:3px;border-radius:2px;background:var(--line2)}
+nav .lb{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+
+/* --- rest timer --- */
+#timer{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(80px + env(safe-area-inset-bottom));z-index:45;
+  display:none;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line2);
+  border-radius:999px;padding:8px 8px 8px 16px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#timer.on{display:flex}
+#timer .t{font-weight:800;font-size:19px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+#timer .x{width:32px;height:32px;border-radius:999px;background:var(--panel2);border:1px solid var(--line2);color:var(--dim)}
+#timer.zero{border-color:var(--green)} #timer.zero .t{color:var(--green)}
+
+/* --- modal --- */
+#modal{position:fixed;inset:0;z-index:60;display:none;background:rgba(6,8,11,.72)}
+#modal.on{display:block}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:88vh;overflow:auto;background:var(--bg);
+  border-top:1px solid var(--line2);border-radius:16px 16px 0 0;padding:18px 16px calc(24px + env(safe-area-inset-bottom));
+  max-width:520px;margin:0 auto;animation:up .18s ease-out}
+@keyframes up{from{transform:translateY(14px);opacity:.6}to{transform:none;opacity:1}}
+.f{margin-bottom:12px}
+.f label{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:700;margin-bottom:6px}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.f3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+
+/* --- history --- */
+.hrow{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.hrow:last-child{border-bottom:0}
+.hrow .d{font-size:11px;color:var(--dim2);font-weight:700;width:52px;flex:none;letter-spacing:.04em}
+table.log{width:100%;border-collapse:collapse;font-size:13px}
+table.log td{padding:3px 0;border-bottom:1px solid rgba(42,49,64,.5)}
+table.log td:last-child{text-align:right;color:var(--dim)}
+
+/* --- misc --- */
+.empty{text-align:center;color:var(--dim);padding:34px 14px;border:1px dashed var(--line2);border-radius:var(--r)}
+.stat{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.stat b{display:block;font-size:24px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;margin-top:2px}
+.bars{display:flex;align-items:flex-end;gap:3px;height:46px;margin-top:10px}
+.bars i{flex:1;background:var(--line2);border-radius:2px 2px 0 0;min-height:2px}
+.bars i.hit{background:var(--green)}
+hr.s{border:0;border-top:1px solid var(--line);margin:16px 0}
+.fav{color:var(--amber)}
+.note{font-size:13px;color:var(--dim);margin-top:6px;font-style:italic}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><i></i>JÄRN</div>
+  <span class="savedot" id="saveDot">Sparat</span>
+  <button class="hbtn" onclick="openSettings()">Data</button>
+</header>
+
+<div id="app"></div>
+
+<div id="timer">
+  <div class="t" id="tval">2:30</div>
+  <button class="x" onclick="stopTimer()">✕</button>
+</div>
+
+<nav>
+  <button id="nav-train" onclick="go('train')"><span class="ic"></span><span class="lb">Träna</span></button>
+  <button id="nav-hist" onclick="go('hist')"><span class="ic"></span><span class="lb">Historik</span></button>
+  <button id="nav-body" onclick="go('body')"><span class="ic"></span><span class="lb">Kropp</span></button>
+  <button id="nav-prog" onclick="go('prog')"><span class="ic"></span><span class="lb">Program</span></button>
+</nav>
+
+<div id="modal" onclick="if(event.target===this)closeModal()"></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   LAGRING — fyra lager
+   1. IndexedDB  (huvudlager, tåligast)
+   2. localStorage (spegel, läses direkt vid start)
+   3. Minne (om webbläsaren blockerar allt)
+   4. Rullande ögonblicksbilder som går att återställa
+   ══════════════════════════════════════════════════════════ */
+var KEY='jarn.v1', SNAPKEY='jarn.snap', mem=null, memSnap=[];
+var DB=null, SNAPS=[], WRITING=0, LASTSAVE=0, ALLOW_EMPTY=false, LASTSNAP=0;
+
+function canStore(){try{localStorage.setItem('_t','1');localStorage.removeItem('_t');return true}catch(e){return false}}
+var HAS_LS=canStore(), HAS_IDB=false, PERSISTED=false;
+
+/* ---- IndexedDB ---- */
+function idb(fn){
+  if(!DB)return;
+  try{
+    var tx=DB.transaction(['kv'],'readwrite');
+    fn(tx.objectStore('kv'));
+  }catch(e){}
+}
+function idbOpen(cb){
+  if(typeof indexedDB==='undefined')return cb(null);
+  var rq;
+  try{rq=indexedDB.open('jarn',1)}catch(e){return cb(null)}
+  rq.onupgradeneeded=function(e){
+    var d=e.target.result;
+    if(!d.objectStoreNames.contains('kv'))d.createObjectStore('kv');
+  };
+  rq.onsuccess=function(e){cb(e.target.result)};
+  rq.onerror=function(){cb(null)};
+  rq.onblocked=function(){cb(null)};
+}
+function idbGet(key,cb){
+  if(!DB)return cb(null);
+  try{
+    var rq=DB.transaction(['kv'],'readonly').objectStore('kv').get(key);
+    rq.onsuccess=function(){cb(rq.result||null)};
+    rq.onerror=function(){cb(null)};
+  }catch(e){cb(null)}
+}
+
+/* ---- spara ---- */
+var saveTimer=null;
+function save(){
+  /* skyddsspärr: skriv aldrig över riktig data med ett tomt state */
+  if(!ALLOW_EMPTY && !S.sessions.length && !S.body.length && !S.routines.length)return;
+  S.ts=Date.now();
+  var s;
+  try{s=JSON.stringify(S)}catch(e){return}
+  mem=s;
+  if(HAS_LS){try{localStorage.setItem(KEY,s)}catch(e){}}
+  WRITING=1;markSave();
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(function(){
+    idb(function(st){st.put(s,KEY)});
+    WRITING=0;LASTSAVE=Date.now();markSave();
+    maybeSnapshot(s);
+  },350);
+}
+function flush(){
+  clearTimeout(saveTimer);
+  try{var s=JSON.stringify(S);mem=s;
+    if(HAS_LS){try{localStorage.setItem(KEY,s)}catch(e){}}
+    idb(function(st){st.put(s,KEY)});
+  }catch(e){}
+  WRITING=0;LASTSAVE=Date.now();markSave();
+}
+
+/* ---- ögonblicksbilder ---- */
+function maybeSnapshot(s,force){
+  var now=Date.now();
+  if(!force && now-LASTSNAP<6e5)return;   /* max var 10:e minut */
+  LASTSNAP=now;
+  snapshot(s);
+}
+function snapshot(s){
+  s=s||JSON.stringify(S);
+  var d=S;
+  SNAPS.push({t:Date.now(),n:d.sessions.length,b:d.body.length,data:s});
+  /* behåll max 12: alla från idag + en per dag bakåt */
+  var seen={},keep=[];
+  for(var i=SNAPS.length-1;i>=0;i--){
+    var day=new Date(SNAPS[i].t).toISOString().slice(0,10);
+    if(keep.length<4||!seen[day]){seen[day]=1;keep.unshift(SNAPS[i])}
+    if(keep.length>=12)break;
+  }
+  SNAPS=keep;
+  idb(function(st){st.put(SNAPS,SNAPKEY)});
+  memSnap=SNAPS;
+  if(HAS_LS){
+    try{localStorage.setItem(SNAPKEY,JSON.stringify(SNAPS.slice(-3)))}catch(e){}
+  }
+}
+function restoreSnap(t){
+  var s=null;
+  SNAPS.forEach(function(x){if(x.t===t)s=x});
+  if(!s)return;
+  ask('Återställ '+new Date(t).toLocaleString('sv-SE').slice(0,16)+'?',
+      s.n+' pass och '+s.b+' vägningar. Nuvarande data sparas som en ögonblicksbild först.','Återställ',function(){
+    snapshot(null);
+    try{S=JSON.parse(s.data);S.detail=null;S.active=S.active||null;flush();closeModal();render();flash('Återställt')}
+    catch(e){flash('Kunde inte läsa den säkerhetskopian')}
+  });
+}
+
+/* ---- läs vid start ---- */
+function loadLS(){
+  var raw=null;
+  if(HAS_LS){try{raw=localStorage.getItem(KEY)}catch(e){}}
+  if(!raw)raw=mem;
+  if(!raw)return null;
+  try{return JSON.parse(raw)}catch(e){return null}
+}
+function boot(){
+  idbOpen(function(db){
+    DB=db;HAS_IDB=!!db;
+    if(!db)return afterBoot();
+    idbGet(SNAPKEY,function(sn){
+      if(sn&&sn.length)SNAPS=sn;
+      else if(HAS_LS){try{SNAPS=JSON.parse(localStorage.getItem(SNAPKEY))||[]}catch(e){}}
+      idbGet(KEY,function(raw){
+        if(raw){
+          try{
+            var d=JSON.parse(raw);
+            /* nyaste vinner — skyddar om localStorage rensats av webbläsaren */
+            if(d && (!S.ts || (d.ts||0)>(S.ts||0))){
+              S=d;S.detail=null;normalize();render();
+              if(HAS_LS){try{localStorage.setItem(KEY,raw)}catch(e){}}
+            }
+          }catch(e){}
+        }
+        afterBoot();
+      });
+    });
+  });
+}
+function afterBoot(){
+  if(navigator.storage&&navigator.storage.persisted){
+    navigator.storage.persisted().then(function(p){
+      PERSISTED=p;
+      if(!p&&navigator.storage.persist)navigator.storage.persist().then(function(ok){PERSISTED=ok;markSave()});
+      markSave();
+    })["catch"](function(){});
+  }
+  /* skriv tillbaka det vinnande läget till båda lagren så de aldrig glider isär */
+  flush();
+  if(!SNAPS.length)snapshot(null);
+  markSave();
+}
+
+/* ---- sparindikator ---- */
+function markSave(){
+  var el=document.getElementById('saveDot');
+  if(!el)return;
+  el.textContent=WRITING?'Sparar…':'Sparat';
+  el.className='savedot'+(WRITING?' busy':'');
+}
+
+/* ---- flusha vid risk att sidan stängs ---- */
+if(typeof window!=='undefined'&&window.addEventListener){
+  window.addEventListener('pagehide',flush);
+  window.addEventListener('beforeunload',flush);
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')flush()});
+}
+
+/* ══════════════════════════════════════════════════════════
+   STARTPROGRAM
+   ══════════════════════════════════════════════════════════ */
+function ex(name,type,sets,lo,hi,inc,rest){
+  return {id:uid(),name:name,type:type,sets:sets,lo:lo,hi:hi,inc:inc,rest:rest,fav:0,note:''};
+}
+function seed(){
+  return {
+    v:1,
+    routines:[
+      {id:uid(),name:'Överkropp A',short:'ÖA',ex:[
+        ex('Bänkpress','bar',3,6,8,2.5,180),
+        ex('Skivstångsrodd','bar',3,6,8,2.5,150),
+        ex('Militärpress','bar',3,6,8,2.5,150),
+        ex('Latsdrag','machine',3,6,8,5,120),
+        ex('Hantelcurl','db',3,8,10,2,90),
+        ex('Triceps pushdown','machine',3,8,10,2.5,90),
+        ex('Face pulls','machine',3,12,15,2.5,60)
+      ]},
+      {id:uid(),name:'Underkropp A',short:'UA',ex:[
+        ex('Knäböj','bar',3,6,8,5,210),
+        ex('Rumänsk marklyft','bar',3,8,8,5,180),
+        ex('Benpress','machine',3,8,10,10,150),
+        ex('Bencurl','machine',3,8,10,5,90),
+        ex('Vadpress','machine',3,10,12,5,60),
+        ex('Hanging leg raise','bw',3,8,12,0,90)
+      ]},
+      {id:uid(),name:'Överkropp B',short:'ÖB',ex:[
+        ex('Chins','bw',3,6,8,2.5,180),
+        ex('Lutande hantelpress','db',3,6,8,2,180),
+        ex('Hantelrodd','db',3,8,8,2,150),
+        ex('Sittande hantelpress','db',3,8,8,2,150),
+        ex('Sidolyft','db',3,12,15,1,60),
+        ex('Hammercurl','db',3,8,10,2,90),
+        ex('Dips','bw',3,8,10,2.5,120)
+      ]},
+      {id:uid(),name:'Underkropp B',short:'UB',ex:[
+        ex('Marklyft','bar',3,5,5,5,240),
+        ex('Frontböj','bar',3,8,8,2.5,180),
+        ex('Bulgarsk splitsquat','db',3,8,8,2,120),
+        ex('Benspark','machine',3,10,12,5,90),
+        ex('Stående vadpress','machine',3,10,12,5,60),
+        ex('Pallof press','machine',3,10,10,2.5,60)
+      ]},
+      {id:uid(),name:'Calisthenics',short:'CA',ex:[
+        ex('Pull-ups','bw',4,5,10,0,90),
+        ex('Dips','bw',4,6,12,0,90),
+        ex('Armhävningar, fötter högt','bw',4,10,15,0,90),
+        ex('Pike push-ups','bw',3,8,12,0,90),
+        ex('Australian rows','bw',3,12,12,0,90),
+        ex('Hollow body hold (sek)','bw',3,30,30,0,60),
+        ex('L-sit (sek)','bw',3,15,20,0,60)
+      ]}
+    ],
+    sessions:[], active:null, body:[], food:[],
+    goals:{kcal:2900,p:130,rest:150,bw:20},
+    view:'train'
+  };
+}
+
+/* ══════════════════════════════════════════════════════════
+   HJÄLPARE
+   ══════════════════════════════════════════════════════════ */
+function uid(){return Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3)}
+function today(){var d=new Date();return d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate())}
+function p2(n){return n<10?'0'+n:''+n}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function nf(n){var r=Math.round(n*100)/100;return String(r)}
+function dayName(iso){
+  var d=new Date(iso+'T12:00:00');
+  return ['sön','mån','tis','ons','tor','fre','lör'][d.getDay()];
+}
+function shortDate(iso){var p=iso.split('-');return p[2]+'/'+Number(p[1])}
+function daysAgo(iso){
+  var a=new Date(iso+'T12:00:00'),b=new Date(today()+'T12:00:00');
+  return Math.round((b-a)/864e5);
+}
+function agoText(iso){
+  if(!iso)return 'aldrig körd';
+  var d=daysAgo(iso);
+  if(d===0)return 'idag'; if(d===1)return 'igår';
+  return d+' dagar sedan';
+}
+function allEx(){var a=[];S.routines.forEach(function(r){r.ex.forEach(function(e){a.push(e)})});return a}
+function findEx(id){var f=null;S.routines.forEach(function(r){r.ex.forEach(function(e){if(e.id===id)f=e})});return f}
+function findRoutine(id){for(var i=0;i<S.routines.length;i++)if(S.routines[i].id===id)return S.routines[i];return null}
+function e1rm(w,r){return w*(1+r/30)}
+
+/* alla loggade set för en övning, nyast först */
+function historyFor(exId){
+  var out=[];
+  for(var i=S.sessions.length-1;i>=0;i--){
+    var s=S.sessions[i], sets=s.sets.filter(function(x){return x.exId===exId});
+    if(sets.length)out.push({date:s.date,sets:sets});
+  }
+  return out;
+}
+function lastPerf(exId){var h=historyFor(exId);return h.length?h[0]:null}
+function bestSet(exId){
+  var b=null;
+  historyFor(exId).forEach(function(d){d.sets.forEach(function(s){
+    if(!b||e1rm(s.w,s.r)>e1rm(b.w,b.r))b={w:s.w,r:s.r,date:d.date};
+  })});
+  return b;
+}
+/* dags att höja? alla set på övre repgränsen förra gången */
+function shouldBump(exId){
+  var e=findEx(exId), l=lastPerf(exId);
+  if(!e||!l||l.sets.length<e.sets)return false;
+  return l.sets.every(function(s){return s.r>=e.hi});
+}
+function lastDate(routine){
+  for(var i=S.sessions.length-1;i>=0;i--)if(S.sessions[i].rid===routine.id)return S.sessions[i].date;
+  return null;
+}
+
+/* ══════════════════════════════════════════════════════════
+   START
+   ══════════════════════════════════════════════════════════ */
+var S=loadLS()||seed();
+function normalize(){
+  if(!S.goals)S.goals={kcal:2900,p:130,rest:150,bw:20};
+  if(!S.food)S.food=[];
+  if(!S.body)S.body=[];
+  if(!S.sessions)S.sessions=[];
+  if(!S.routines)S.routines=[];
+  if(!S.meta)S.meta={lastBackup:0};
+}
+normalize();
+
+function go(v){S.view=v;S.detail=null;save();render();window.scrollTo(0,0)}
+function render(){
+  ['train','hist','body','prog'].forEach(function(v){
+    var b=document.getElementById('nav-'+v); if(b)b.className=(S.view===v?'on':'');
+  });
+  var h='';
+  if(S.detail)h=viewDetail(S.detail);
+  else if(S.view==='train'&&S.active)h=viewSession();
+  else{
+    if(S.active)h+='<button class="rcard due" onclick="go(\'train\')" style="margin-bottom:14px">'+
+      '<span class="tag">▶</span><span class="grow"><span style="display:block;font-weight:700">Pass pågår</span>'+
+      '<span class="sub">'+esc(findRoutine(S.active.rid).name)+' — tillbaka till loggen</span></span></button>';
+    if(S.view==='train')h+=viewTrain();
+    else if(S.view==='hist')h+=viewHist();
+    else if(S.view==='body')h+=viewBody();
+    else h+=viewProg();
+  }
+  document.getElementById('app').innerHTML=h;
+}
+
+/* ══════════════════════════════════════════════════════════
+   VY: TRÄNA
+   ══════════════════════════════════════════════════════════ */
+function viewTrain(){
+  var h='';
+  var lb=(S.meta&&S.meta.lastBackup)||0;
+  if(S.sessions.length>=4 && Date.now()-lb>12096e5){
+    h+='<div class="card" style="border-color:var(--line2)"><div class="between"><div class="grow">';
+    h+='<div style="font-weight:700">Dags för en backupfil</div>';
+    h+='<div class="sub">'+(lb?'Senaste backup '+agoText(new Date(lb).toISOString().slice(0,10)):'Du har aldrig laddat ner en')+'. Lägg den i molnet så överlever den en trasig telefon.</div>';
+    h+='</div><button class="btn sm pri" onclick="exportData()">Ladda ner</button></div></div>';
+  }
+  var week=S.sessions.filter(function(s){return daysAgo(s.date)<7}).length;
+  var vol=0;
+  S.sessions.filter(function(s){return daysAgo(s.date)<7}).forEach(function(s){
+    s.sets.forEach(function(x){vol+=x.w*x.r});
+  });
+  var bw=S.body.length?S.body[S.body.length-1].kg:null;
+
+  h+='<div class="row" style="gap:10px;margin-bottom:16px">';
+  h+='<div class="stat"><span class="tiny">Pass 7 dgr</span><b>'+week+'<span style="font-size:13px;color:var(--dim2);font-weight:700">/5</span></b></div>';
+  h+='<div class="stat"><span class="tiny">Volym 7 dgr</span><b>'+(vol>=1000?Math.round(vol/1000)+'<span style="font-size:13px;color:var(--dim2)">t</span>':Math.round(vol))+'</b></div>';
+  h+='<div class="stat"><span class="tiny">Vikt</span><b>'+(bw?nf(bw):'—')+'<span style="font-size:13px;color:var(--dim2);font-weight:700">kg</span></b></div>';
+  h+='</div>';
+
+  h+='<h2>Välj pass</h2>';
+  S.routines.forEach(function(r){
+    var ld=lastDate(r), d=ld?daysAgo(ld):999, due=d>=6;
+    h+='<button class="rcard'+(due?' due':'')+'" onclick="startSession(\''+r.id+'\')">';
+    h+='<span class="tag">'+esc(r.short||r.name.slice(0,2).toUpperCase())+'</span>';
+    h+='<span class="grow"><span style="display:block;font-weight:700;font-size:16px">'+esc(r.name)+'</span>';
+    h+='<span class="sub">'+r.ex.length+' övningar · '+agoText(ld)+'</span></span>';
+    h+='<span style="color:var(--dim2);font-size:20px">›</span></button>';
+  });
+
+  if(!S.sessions.length){
+    h+='<div class="empty" style="margin-top:14px">Inget loggat än.<br><span class="sub">Kör första passet lugnt — de två första veckorna handlar om teknik, inte vikter.</span></div>';
+  }
+  return h;
+}
+
+/* ══════════════════════════════════════════════════════════
+   VY: AKTIVT PASS
+   ══════════════════════════════════════════════════════════ */
+function startSession(rid){
+  var r=findRoutine(rid); if(!r)return;
+  var logged={};
+  r.ex.forEach(function(e){
+    var l=lastPerf(e.id), arr=[];
+    for(var i=0;i<e.sets;i++){
+      var prev=l&&l.sets[i]?l.sets[i]:(l&&l.sets.length?l.sets[l.sets.length-1]:null);
+      var w=prev?prev.w:'';
+      if(prev&&shouldBump(e.id))w=prev.w+(e.inc||0);
+      arr.push({w:w===''?'':w,r:'',done:0});
+    }
+    logged[e.id]=arr;
+  });
+  S.active={rid:rid,date:today(),start:Date.now(),note:'',logged:logged};
+  save();render();window.scrollTo(0,0);
+}
+
+function viewSession(){
+  var A=S.active, r=findRoutine(A.rid);
+  if(!r){S.active=null;save();return viewTrain()}
+  var doneSets=0,total=0;
+  r.ex.forEach(function(e){(A.logged[e.id]||[]).forEach(function(s){total++;if(s.done)doneSets++})});
+
+  var h='';
+  h+='<div class="between" style="margin-bottom:14px">';
+  h+='<div><h3>'+esc(r.name)+'</h3><div class="sub">'+doneSets+' av '+total+' set klara</div></div>';
+  h+='<button class="btn sm ghost" onclick="abortSession()">Avbryt</button></div>';
+
+  r.ex.forEach(function(e){
+    var sets=A.logged[e.id]||[], l=lastPerf(e.id), bump=shouldBump(e.id);
+    h+='<div class="card">';
+    h+='<div class="between"><div class="grow">';
+    h+='<div class="exhead"><h3 class="trunc">'+(e.fav?'<span class="fav">★</span> ':'')+esc(e.name)+'</h3></div>';
+    h+='<div class="sub">'+e.sets+' × '+(e.lo===e.hi?e.lo:e.lo+'–'+e.hi)+' reps · vila '+Math.round((e.rest||S.goals.rest)/60*10)/10+' min</div>';
+    h+='</div><button class="btn sm ghost" onclick="openEx(\''+e.id+'\')">Ändra</button></div>';
+
+    if(l){
+      var txt=l.sets.map(function(s){return nf(s.w)+'×'+s.r}).join('  ');
+      h+='<div class="ghost mono" style="margin-top:8px">Förra ('+shortDate(l.date)+'): '+txt+'</div>';
+    }else{
+      h+='<div class="ghost" style="margin-top:8px">Första gången — hitta en vikt du klarar '+e.hi+' reps med, 2 reps från failure.</div>';
+    }
+    if(bump)h+='<div class="flag up">↑ Höj '+nf(e.inc)+' kg idag</div>';
+    if(e.note)h+='<div class="note">'+esc(e.note)+'</div>';
+
+    h+='<div class="unitrow"><span></span><span>'+(e.type==='bw'?'Extra kg':'Kg')+'</span><span>Reps</span><span></span></div>';
+    sets.forEach(function(s,i){
+      h+='<div class="setrow'+(s.done?' done':'')+'" id="sr-'+e.id+'-'+i+'">';
+      h+='<div class="idx">'+(i+1)+'</div>';
+      h+='<input inputmode="decimal" placeholder="—" value="'+(s.w===''?'':nf(s.w))+'" oninput="setVal(\''+e.id+'\','+i+',\'w\',this.value)">';
+      h+='<input inputmode="numeric" placeholder="'+e.hi+'" value="'+(s.r===''?'':s.r)+'" oninput="setVal(\''+e.id+'\','+i+',\'r\',this.value)">';
+      h+='<button class="ck" onclick="toggleSet(\''+e.id+'\','+i+')">'+(s.done?'✓':'○')+'</button>';
+      h+='</div>';
+    });
+
+    if(e.type==='bar'){
+      var top=0; sets.forEach(function(s){if(s.w!==''&&+s.w>top)top=+s.w});
+      h+=plateBar(top);
+    }
+    h+='<div class="row" style="margin-top:10px;gap:8px">';
+    h+='<button class="btn sm ghost grow" onclick="addSet(\''+e.id+'\')">+ Set</button>';
+    h+='<button class="btn sm ghost grow" onclick="showDetail(\''+e.id+'\')">Historik</button>';
+    h+='</div></div>';
+  });
+
+  h+='<div class="f" style="margin-top:16px"><label>Anteckning om passet</label>';
+  h+='<textarea rows="2" placeholder="Energi, sömn, vad som kändes bra eller dåligt…" oninput="S.active.note=this.value;save()">'+esc(A.note)+'</textarea></div>';
+  h+='<button class="btn pri" style="width:100%;padding:15px" onclick="finishSession()">Spara passet</button>';
+  h+='<div style="height:20px"></div>';
+  return h;
+}
+
+function plateBar(kg){
+  var BAR=20;
+  if(!kg||kg<=BAR)return '<div class="bar"><span class="sleeve"></span><span class="lbl">'+(kg?'stången räcker ('+BAR+' kg)':'ange vikt')+'</span></div>';
+  var each=(kg-BAR)/2, left=each, sizes=[25,20,15,10,5,2.5,1.25];
+  var col={25:'var(--p25)',20:'var(--p20)',15:'var(--p15)',10:'var(--p10)',5:'var(--p5)',2.5:'var(--p2)',1.25:'var(--p1)'};
+  var hgt={25:26,20:24,15:22,10:19,5:15,2.5:11,1.25:8};
+  var out='',cnt=0,parts=[];
+  sizes.forEach(function(z){
+    var n=Math.floor((left+1e-9)/z);
+    if(n>0){left-=n*z;cnt+=n;parts.push(n+'×'+nf(z));
+      for(var i=0;i<n;i++)out+='<span class="plate" style="height:'+hgt[z]+'px;background:'+col[z]+'"></span>';}
+  });
+  var lbl=cnt?parts.join(' + ')+' per sida':'går ej att lasta jämnt';
+  if(left>0.01)lbl+=' (+'+nf(left*2)+' kg kvar)';
+  return '<div class="bar"><span class="sleeve"></span>'+out+'<span class="lbl">'+lbl+'</span></div>';
+}
+
+function setVal(exId,i,k,v){
+  var a=S.active.logged[exId]; if(!a||!a[i])return;
+  a[i][k]=(v===''?'':(k==='w'?parseFloat(v.replace(',','.'))||0:parseInt(v)||0));
+  save();
+  if(k==='w'){
+    var e=findEx(exId);
+    if(e&&e.type==='bar'){
+      var card=document.getElementById('sr-'+exId+'-'+i).parentNode;
+      var bar=card.querySelector('.bar');
+      if(bar){var top=0;a.forEach(function(s){if(s.w!==''&&+s.w>top)top=+s.w});
+        bar.outerHTML=plateBar(top);}
+    }
+  }
+}
+function toggleSet(exId,i){
+  var a=S.active.logged[exId],e=findEx(exId),s=a[i];
+  if(!s.done){
+    if(s.r===''||s.r===0)s.r=e.hi;
+    if(s.w===''&&e.type!=='bw')return flash('Fyll i vikten först');
+    if(s.w==='')s.w=0;
+    s.done=1;save();render();
+    startTimer(e.rest||S.goals.rest);
+  }else{s.done=0;save();render()}
+}
+function addSet(exId){
+  var a=S.active.logged[exId],last=a[a.length-1];
+  a.push({w:last?last.w:'',r:'',done:0});save();render();
+}
+function abortSession(){
+  ask('Avbryt passet?','Allt du loggat nu försvinner.','Avbryt passet',function(){
+    S.active=null;stopTimer();save();render();
+  });
+}
+function finishSession(){
+  var A=S.active,r=findRoutine(A.rid),sets=[];
+  r.ex.forEach(function(e){
+    (A.logged[e.id]||[]).forEach(function(s,i){
+      if(s.done)sets.push({exId:e.id,name:e.name,i:i+1,w:+s.w||0,r:+s.r||0});
+    });
+  });
+  if(!sets.length)return flash('Inga set klarmarkerade än');
+  S.sessions.push({id:uid(),rid:r.id,rname:r.name,date:A.date,
+    min:Math.round((Date.now()-A.start)/60000),note:A.note,sets:sets});
+  S.active=null;stopTimer();S.view='hist';flush();snapshot(null);render();window.scrollTo(0,0);
+  flash('Passet sparat — '+sets.length+' set');
+}
+
+/* ══════════════════════════════════════════════════════════
+   VY: HISTORIK
+   ══════════════════════════════════════════════════════════ */
+function viewHist(){
+  if(!S.sessions.length)return '<div class="empty">Inga pass loggade än.<br><span class="sub">Historiken fylls i sig själv när du kör.</span></div>';
+  var h='<h2>Loggade pass</h2>';
+  for(var i=S.sessions.length-1;i>=0;i--){
+    var s=S.sessions[i],vol=0;
+    s.sets.forEach(function(x){vol+=x.w*x.r});
+    h+='<div class="card">';
+    h+='<div class="between"><div><h3>'+esc(s.rname)+'</h3>';
+    h+='<div class="sub">'+dayName(s.date)+' '+s.date+' · '+s.sets.length+' set · '+Math.round(vol)+' kg volym'+(s.min?' · '+s.min+' min':'')+'</div></div>';
+    h+='<button class="btn sm ghost" onclick="delSession(\''+s.id+'\')">Radera</button></div>';
+    h+='<table class="log" style="margin-top:10px">';
+    var seen={};
+    s.sets.forEach(function(x){
+      if(seen[x.exId])return; seen[x.exId]=1;
+      var mine=s.sets.filter(function(y){return y.exId===x.exId});
+      h+='<tr><td>'+esc(x.name)+'</td><td class="mono">'+mine.map(function(m){return nf(m.w)+'×'+m.r}).join('  ')+'</td></tr>';
+    });
+    h+='</table>';
+    if(s.note)h+='<div class="note">'+esc(s.note)+'</div>';
+    h+='</div>';
+  }
+  return h;
+}
+function delSession(id){
+  ask('Radera passet?','Det går inte att ångra.','Radera',function(){
+    S.sessions=S.sessions.filter(function(s){return s.id!==id});save();render();
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   VY: ÖVNINGSDETALJ
+   ══════════════════════════════════════════════════════════ */
+function showDetail(id){S.detail=id;save();render();window.scrollTo(0,0)}
+function viewDetail(id){
+  var e=findEx(id); if(!e){S.detail=null;return viewTrain()}
+  var hist=historyFor(id),best=bestSet(id);
+  var h='<button class="btn sm ghost" onclick="S.detail=null;save();render()" style="margin-bottom:14px">‹ Tillbaka</button>';
+  h+='<h3>'+esc(e.name)+'</h3><div class="sub" style="margin-bottom:14px">'+e.sets+' × '+e.lo+'–'+e.hi+' reps · steg '+nf(e.inc)+' kg</div>';
+
+  h+='<div class="row" style="gap:10px;margin-bottom:14px">';
+  h+='<div class="stat"><span class="tiny">Bästa set</span><b>'+(best?nf(best.w)+'<span style="font-size:13px;color:var(--dim2)">×'+best.r+'</span>':'—')+'</b></div>';
+  h+='<div class="stat"><span class="tiny">Est. 1RM</span><b>'+(best?Math.round(e1rm(best.w,best.r)):'—')+'<span style="font-size:13px;color:var(--dim2);font-weight:700">kg</span></b></div>';
+  h+='<div class="stat"><span class="tiny">Pass</span><b>'+hist.length+'</b></div></div>';
+
+  if(hist.length>1){
+    var pts=hist.slice().reverse().map(function(d){
+      var top=0;d.sets.forEach(function(s){var v=e1rm(s.w,s.r);if(v>top)top=v});
+      return {x:d.date,y:top};
+    });
+    h+='<h2>Utveckling (est. 1RM)</h2>'+chart(pts,'var(--red)');
+  }
+  h+='<h2>Alla pass</h2>';
+  if(!hist.length)h+='<div class="empty">Inget loggat än.</div>';
+  hist.forEach(function(d){
+    h+='<div class="hrow"><div class="d">'+shortDate(d.date)+'</div>';
+    h+='<div class="grow mono" style="font-size:13px">'+d.sets.map(function(s){return nf(s.w)+'×'+s.r}).join('   ')+'</div></div>';
+  });
+  h+='<div style="height:16px"></div><button class="btn ghost" style="width:100%" onclick="openEx(\''+id+'\')">Ändra övningen</button>';
+  return h;
+}
+
+/* enkel linjegraf */
+function chart(pts,color){
+  if(pts.length<2)return '';
+  var W=492,H=120,P=6;
+  var ys=pts.map(function(p){return p.y}),mn=Math.min.apply(null,ys),mx=Math.max.apply(null,ys);
+  if(mx===mn){mx=mn+1}
+  var pad=(mx-mn)*.15;mn-=pad;mx+=pad;
+  var d='',dots='';
+  pts.forEach(function(p,i){
+    var x=P+i*(W-2*P)/(pts.length-1);
+    var y=H-P-(p.y-mn)/(mx-mn)*(H-2*P);
+    d+=(i?'L':'M')+nf(x)+' '+nf(y);
+    dots+='<circle cx="'+nf(x)+'" cy="'+nf(y)+'" r="3" fill="'+color+'"/>';
+  });
+  return '<div class="card" style="padding:10px"><svg viewBox="0 0 '+W+' '+H+'" width="100%" height="'+H+'" preserveAspectRatio="none">'+
+    '<path d="'+d+'" fill="none" stroke="'+color+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'+dots+'</svg>'+
+    '<div class="between"><span class="tiny">'+shortDate(pts[0].x)+'</span>'+
+    '<span class="tiny">'+Math.round(pts[0].y)+' → '+Math.round(pts[pts.length-1].y)+'</span>'+
+    '<span class="tiny">'+shortDate(pts[pts.length-1].x)+'</span></div></div>';
+}
+
+/* ══════════════════════════════════════════════════════════
+   VY: KROPP
+   ══════════════════════════════════════════════════════════ */
+function viewBody(){
+  var h='',b=S.body.slice().sort(function(a,c){return a.d<c.d?-1:1});
+  var cur=b.length?b[b.length-1].kg:null;
+  var wk=b.filter(function(x){return daysAgo(x.d)<7}),pw=b.filter(function(x){return daysAgo(x.d)>=7&&daysAgo(x.d)<14});
+  var avg=function(a){return a.length?a.reduce(function(s,x){return s+x.kg},0)/a.length:null};
+  var a1=avg(wk),a2=avg(pw),trend=(a1!=null&&a2!=null)?a1-a2:null;
+
+  h+='<h2>Kroppsvikt</h2>';
+  h+='<div class="row" style="gap:10px;margin-bottom:10px">';
+  h+='<div class="stat"><span class="tiny">Senast</span><b>'+(cur!=null?nf(cur):'—')+'<span style="font-size:13px;color:var(--dim2);font-weight:700">kg</span></b></div>';
+  h+='<div class="stat"><span class="tiny">Snitt 7 dgr</span><b>'+(a1!=null?nf(Math.round(a1*10)/10):'—')+'</b></div>';
+  h+='<div class="stat"><span class="tiny">Trend/vecka</span><b style="color:'+(trend==null?'inherit':(trend>=0.15&&trend<=0.5?'var(--green)':'var(--amber)'))+'">'+(trend!=null?(trend>0?'+':'')+nf(Math.round(trend*100)/100):'—')+'</b></div></div>';
+
+  h+='<div class="card"><div class="row" style="gap:8px">';
+  h+='<input id="bwIn" inputmode="decimal" placeholder="Vikt i kg" style="flex:2">';
+  h+='<button class="btn pri" style="flex:1" onclick="addBW()">Spara</button></div>';
+  h+='<div class="sub" style="margin-top:8px">Väg dig på morgonen, efter toaletten, före frukost. Målet är +0,25–0,4 kg/vecka på snittet.</div></div>';
+
+  if(b.length>1)h+=chart(b.map(function(x){return {x:x.d,y:x.kg}}),'var(--blue)');
+  if(b.length){
+    h+='<h2>Loggade vägningar</h2>';
+    b.slice().reverse().slice(0,14).forEach(function(x){
+      h+='<div class="hrow"><div class="d">'+shortDate(x.d)+'</div><div class="grow mono">'+nf(x.kg)+' kg</div>';
+      h+='<button class="btn sm ghost" onclick="delBW(\''+x.d+'\')">✕</button></div>';
+    });
+  }
+
+  /* mat */
+  var f=S.food.slice().sort(function(a,c){return a.d<c.d?-1:1});
+  var t=f.filter(function(x){return x.d===today()})[0];
+  h+='<h2>Mat idag</h2>';
+  h+='<div class="card">';
+  h+='<div class="between"><div><span class="tiny">Kalorier</span><div style="font-size:26px;font-weight:800;letter-spacing:-.03em" class="num">'+((t&&t.kcal)||0)+' <span style="font-size:14px;color:var(--dim2)">/ '+S.goals.kcal+'</span></div></div>';
+  h+='<div style="text-align:right"><span class="tiny">Protein</span><div style="font-size:26px;font-weight:800;letter-spacing:-.03em" class="num">'+((t&&t.p)||0)+' <span style="font-size:14px;color:var(--dim2)">/ '+S.goals.p+'</span></div></div></div>';
+  h+='<div class="f2" style="margin-top:12px"><input id="kcIn" inputmode="numeric" placeholder="kcal" value="'+((t&&t.kcal)||'')+'"><input id="prIn" inputmode="numeric" placeholder="protein g" value="'+((t&&t.p)||'')+'"></div>';
+  h+='<button class="btn" style="width:100%;margin-top:10px" onclick="saveFood()">Spara dagens mat</button>';
+  h+='</div>';
+  if(f.length){
+    var last=f.slice(-14);
+    h+='<div class="card"><span class="tiny">Kalorier, senaste 14 dagarna</span><div class="bars">';
+    last.forEach(function(x){
+      var pct=Math.min(100,Math.round(x.kcal/S.goals.kcal*100));
+      h+='<i class="'+(pct>=95?'hit':'')+'" style="height:'+Math.max(4,pct*.46)+'px" title="'+x.d+': '+x.kcal+'"></i>';
+    });
+    h+='</div></div>';
+  }
+  return h;
+}
+function addBW(){
+  var v=parseFloat((document.getElementById('bwIn').value||'').replace(',','.'));
+  if(!v)return flash('Skriv in en vikt');
+  S.body=S.body.filter(function(x){return x.d!==today()});
+  S.body.push({d:today(),kg:v});save();render();
+}
+function delBW(d){S.body=S.body.filter(function(x){return x.d!==d});save();render()}
+function saveFood(){
+  var k=parseInt(document.getElementById('kcIn').value)||0;
+  var p=parseInt(document.getElementById('prIn').value)||0;
+  S.food=S.food.filter(function(x){return x.d!==today()});
+  if(k||p)S.food.push({d:today(),kcal:k,p:p});
+  save();render();flash('Sparat');
+}
+
+/* ══════════════════════════════════════════════════════════
+   VY: PROGRAM (redigera övningar)
+   ══════════════════════════════════════════════════════════ */
+function viewProg(){
+  var h='<h2>Dina pass</h2>';
+  S.routines.forEach(function(r,ri){
+    h+='<div class="card">';
+    h+='<div class="between"><div class="grow"><h3 class="trunc">'+esc(r.name)+'</h3><div class="sub">'+r.ex.length+' övningar</div></div>';
+    h+='<button class="btn sm ghost" onclick="openRoutine(\''+r.id+'\')">Namn</button></div>';
+    h+='<div style="margin-top:10px">';
+    r.ex.forEach(function(e,i){
+      h+='<div class="hrow">';
+      h+='<div class="grow" style="min-width:0"><div class="trunc" style="font-weight:600">'+(e.fav?'<span class="fav">★</span> ':'')+esc(e.name)+'</div>';
+      h+='<div class="sub">'+e.sets+'×'+(e.lo===e.hi?e.lo:e.lo+'–'+e.hi)+' · +'+nf(e.inc)+' kg · '+typeName(e.type)+'</div></div>';
+      h+='<button class="btn sm ghost" onclick="moveEx(\''+r.id+'\','+i+',-1)" '+(i===0?'disabled':'')+'>↑</button>';
+      h+='<button class="btn sm ghost" onclick="moveEx(\''+r.id+'\','+i+',1)" '+(i===r.ex.length-1?'disabled':'')+'>↓</button>';
+      h+='<button class="btn sm ghost" onclick="openEx(\''+e.id+'\')">Ändra</button>';
+      h+='</div>';
+    });
+    h+='</div>';
+    h+='<button class="btn sm ghost" style="width:100%;margin-top:10px" onclick="openEx(null,\''+r.id+'\')">+ Lägg till övning</button>';
+    h+='</div>';
+  });
+  h+='<button class="btn ghost" style="width:100%" onclick="addRoutine()">+ Nytt pass</button>';
+
+  h+='<h2>Så funkar progressionen</h2><div class="card"><div class="sub">';
+  h+='Börja i nedre delen av repspannet. Klarar du <b style="color:var(--ink)">övre repgränsen på alla set</b> flaggar appen övningen med <span class="fav">↑ Höj</span> nästa gång och lägger automatiskt på steget i viktfältet. Då landar du tillbaka på de lägre repsen och jobbar dig upp igen.';
+  h+='</div></div>';
+  return h;
+}
+function typeName(t){return {bar:'skivstång',db:'hantlar',machine:'maskin/kabel',bw:'kroppsvikt'}[t]||t}
+
+function moveEx(rid,i,d){
+  var r=findRoutine(rid),j=i+d;
+  if(j<0||j>=r.ex.length)return;
+  var t=r.ex[i];r.ex[i]=r.ex[j];r.ex[j]=t;save();render();
+}
+function addRoutine(){
+  S.routines.push({id:uid(),name:'Nytt pass',short:'NY',ex:[]});save();render();
+}
+function openRoutine(rid){
+  var r=findRoutine(rid);
+  var h='<div class="sheet" onclick="event.stopPropagation()">';
+  h+='<h3 style="margin-bottom:14px">Passets namn</h3>';
+  h+='<div class="f"><label>Namn</label><input id="rn" value="'+esc(r.name)+'"></div>';
+  h+='<div class="f"><label>Kort etikett (2 tecken)</label><input id="rs" maxlength="3" value="'+esc(r.short||'')+'"></div>';
+  h+='<div class="row" style="gap:10px"><button class="btn pri grow" onclick="saveRoutine(\''+rid+'\')">Spara</button>';
+  h+='<button class="btn ghost" onclick="closeModal()">Avbryt</button></div>';
+  h+='<button class="btn ghost" style="width:100%;margin-top:10px;color:var(--red)" onclick="delRoutine(\''+rid+'\')">Radera passet</button>';
+  h+='</div>';
+  showModal(h);
+}
+function saveRoutine(rid){
+  var r=findRoutine(rid);
+  r.name=document.getElementById('rn').value||r.name;
+  r.short=(document.getElementById('rs').value||'').toUpperCase();
+  save();closeModal();render();
+}
+function delRoutine(rid){
+  ask('Radera passet?','Loggad historik ligger kvar under Historik.','Radera',function(){
+    S.routines=S.routines.filter(function(x){return x.id!==rid});save();closeModal();render();
+  });
+}
+
+/* redigera / lägg till övning */
+function openEx(exId,rid){
+  var e=exId?findEx(exId):{name:'',type:'bar',sets:3,lo:6,hi:8,inc:2.5,rest:150,fav:0,note:''};
+  var h='<div class="sheet" onclick="event.stopPropagation()">';
+  h+='<h3 style="margin-bottom:4px">'+(exId?'Ändra övning':'Ny övning')+'</h3>';
+  h+='<div class="sub" style="margin-bottom:16px">Byt ut det som inte funkar för dig. Gammal historik ligger kvar.</div>';
+  h+='<div class="f"><label>Namn</label><input id="en" value="'+esc(e.name)+'" placeholder="t.ex. Lutande bänkpress"></div>';
+  h+='<div class="f"><label>Typ</label><select id="et">';
+  ['bar','db','machine','bw'].forEach(function(t){
+    h+='<option value="'+t+'"'+(e.type===t?' selected':'')+'>'+typeName(t)+'</option>';
+  });
+  h+='</select></div>';
+  h+='<div class="f3"><div class="f"><label>Set</label><input id="es" inputmode="numeric" value="'+e.sets+'"></div>';
+  h+='<div class="f"><label>Reps min</label><input id="el" inputmode="numeric" value="'+e.lo+'"></div>';
+  h+='<div class="f"><label>Reps max</label><input id="eh" inputmode="numeric" value="'+e.hi+'"></div></div>';
+  h+='<div class="f2"><div class="f"><label>Viktsteg (kg)</label><input id="ei" inputmode="decimal" value="'+nf(e.inc)+'"></div>';
+  h+='<div class="f"><label>Vila (sek)</label><input id="er" inputmode="numeric" value="'+(e.rest||150)+'"></div></div>';
+  h+='<div class="f"><label>Anteckning</label><input id="eo" value="'+esc(e.note||'')+'" placeholder="t.ex. känns i axeln, kör smalare grepp"></div>';
+  h+='<label class="row" style="gap:10px;margin-bottom:16px;cursor:pointer"><input type="checkbox" id="ef" '+(e.fav?'checked':'')+' style="width:20px;height:20px;flex:none">';
+  h+='<span class="sub">Funkar bra för mig — markera med ★</span></label>';
+  h+='<div class="row" style="gap:10px"><button class="btn pri grow" onclick="saveEx('+(exId?"'"+exId+"'":'null')+','+(rid?"'"+rid+"'":'null')+')">Spara</button>';
+  h+='<button class="btn ghost" onclick="closeModal()">Avbryt</button></div>';
+  if(exId)h+='<button class="btn ghost" style="width:100%;margin-top:10px;color:var(--red)" onclick="delEx(\''+exId+'\')">Ta bort ur passet</button>';
+  h+='</div>';
+  showModal(h);
+}
+function saveEx(exId,rid){
+  var g=function(id){return document.getElementById(id).value};
+  var name=g('en').trim();
+  if(!name)return flash('Övningen behöver ett namn');
+  var data={
+    name:name,type:g('et'),
+    sets:Math.max(1,parseInt(g('es'))||3),
+    lo:Math.max(1,parseInt(g('el'))||6),
+    hi:Math.max(1,parseInt(g('eh'))||8),
+    inc:parseFloat(g('ei').replace(',','.'))||0,
+    rest:Math.max(15,parseInt(g('er'))||150),
+    note:g('eo').trim(),
+    fav:document.getElementById('ef').checked?1:0
+  };
+  if(data.hi<data.lo)data.hi=data.lo;
+  if(exId){
+    var e=findEx(exId);
+    for(var k in data)e[k]=data[k];
+    if(S.active&&S.active.logged[exId]){
+      var a=S.active.logged[exId];
+      while(a.length<data.sets)a.push({w:a.length?a[a.length-1].w:'',r:'',done:0});
+    }
+  }else{
+    var r=findRoutine(rid);
+    data.id=uid();r.ex.push(data);
+  }
+  save();closeModal();render();
+}
+function delEx(exId){
+  ask('Ta bort övningen?','Historiken finns kvar under Historik, men övningen försvinner ur passet.','Ta bort',function(){
+    S.routines.forEach(function(r){r.ex=r.ex.filter(function(e){return e.id!==exId})});
+    if(S.active&&S.active.logged[exId])delete S.active.logged[exId];
+    if(S.detail===exId)S.detail=null;
+    save();closeModal();render();
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   INSTÄLLNINGAR / BACKUP
+   ══════════════════════════════════════════════════════════ */
+function openSettings(){
+  var h='<div class="sheet" onclick="event.stopPropagation()">';
+  h+='<h3 style="margin-bottom:16px">Mål och data</h3>';
+  h+='<div class="f2"><div class="f"><label>Kalorimål</label><input id="gk" inputmode="numeric" value="'+S.goals.kcal+'"></div>';
+  h+='<div class="f"><label>Proteinmål (g)</label><input id="gp" inputmode="numeric" value="'+S.goals.p+'"></div></div>';
+  h+='<div class="f"><label>Standardvila (sek)</label><input id="gr" inputmode="numeric" value="'+S.goals.rest+'"></div>';
+  h+='<button class="btn pri" style="width:100%" onclick="saveGoals()">Spara mål</button>';
+  h+='<hr class="s">';
+  h+='<div class="tiny" style="margin-bottom:8px">Var datan ligger</div>';
+  h+='<div class="card" style="padding:12px">';
+  h+=stRow('IndexedDB (huvudlager)',HAS_IDB);
+  h+=stRow('localStorage (spegel)',HAS_LS);
+  h+=stRow('Skyddad mot automatisk rensning',PERSISTED);
+  h+='<div class="sub" style="margin-top:10px">'+S.sessions.length+' pass · '+S.body.length+' vägningar · '+SNAPS.length+' ögonblicksbilder</div>';
+  if(!PERSISTED)h+='<div class="sub" style="margin-top:8px;color:var(--amber)">Lägg till appen på hemskärmen — då slutar webbläsaren rensa lagringen åt dig.</div>';
+  h+='</div>';
+
+  h+='<div class="tiny" style="margin:16px 0 8px">Backupfil</div>';
+  h+='<div class="row" style="gap:10px"><button class="btn grow" onclick="exportData()">Ladda ner</button>';
+  h+='<button class="btn grow" onclick="document.getElementById(\'imp\').click()">Läs in</button></div>';
+  h+='<input type="file" id="imp" accept="application/json" style="display:none" onchange="importData(this)">';
+
+  h+='<div class="tiny" style="margin:16px 0 8px">Återställ en tidigare version</div>';
+  if(!SNAPS.length)h+='<div class="sub">Inga ögonblicksbilder än.</div>';
+  SNAPS.slice().reverse().forEach(function(s){
+    h+='<div class="hrow"><div class="grow"><div style="font-weight:600;font-size:14px">'+new Date(s.t).toLocaleString('sv-SE').slice(0,16)+'</div>';
+    h+='<div class="sub">'+s.n+' pass · '+s.b+' vägningar</div></div>';
+    h+='<button class="btn sm ghost" onclick="restoreSnap('+s.t+')">Återställ</button></div>';
+  });
+  h+='<button class="btn ghost" style="width:100%;margin-top:10px;color:var(--red)" onclick="wipe()">Nollställ allt</button>';
+  h+='<button class="btn ghost" style="width:100%;margin-top:10px" onclick="closeModal()">Stäng</button>';
+  h+='</div>';
+  showModal(h);
+}
+function saveGoals(){
+  S.goals.kcal=parseInt(document.getElementById('gk').value)||2900;
+  S.goals.p=parseInt(document.getElementById('gp').value)||130;
+  S.goals.rest=parseInt(document.getElementById('gr').value)||150;
+  save();closeModal();render();flash('Mål sparade');
+}
+function stRow(label,ok){
+  return '<div class="between" style="padding:4px 0"><span class="sub">'+label+'</span>'+
+    '<span style="font-weight:800;font-size:12px;color:'+(ok?'var(--green)':'var(--dim2)')+'">'+(ok?'aktiv':'av')+'</span></div>';
+}
+function exportData(){
+  var blob=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='jarn-backup-'+today()+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  S.meta.lastBackup=Date.now();flush();
+}
+function importData(inp){
+  var f=inp.files[0];if(!f)return;
+  var rd=new FileReader();
+  rd.onload=function(){
+    try{
+      var d=JSON.parse(rd.result);
+      if(!d.routines||!d.routines.length)throw 0;
+      snapshot(null);
+      S=d;S.detail=null;normalize();flush();closeModal();render();
+      flash('Backup inläst — '+S.sessions.length+' pass');
+    }catch(e){flash('Filen gick inte att läsa')}
+  };
+  rd.readAsText(f);
+}
+function wipe(){
+  ask('Nollställ allt?','Alla pass, vikter och ändrade övningar raderas. En ögonblicksbild sparas så du kan ångra dig.','Radera allt',function(){
+    snapshot(null);
+    ALLOW_EMPTY=true;S=seed();normalize();flush();ALLOW_EMPTY=false;
+    closeModal();render();flash('Nollställt — kan återställas under Data');
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   VILOTIMER
+   ══════════════════════════════════════════════════════════ */
+var tInt=null,tEnd=0;
+function startTimer(sec){
+  stopTimer();tEnd=Date.now()+sec*1000;
+  var el=document.getElementById('timer');el.className='on';
+  tick();tInt=setInterval(tick,250);
+}
+function tick(){
+  var left=Math.max(0,Math.round((tEnd-Date.now())/1000));
+  var el=document.getElementById('timer');
+  document.getElementById('tval').textContent=Math.floor(left/60)+':'+p2(left%60);
+  if(left<=0){
+    el.className='on zero';
+    if(tInt){clearInterval(tInt);tInt=null;
+      if(navigator.vibrate)navigator.vibrate([120,80,120]);}
+  }
+}
+function stopTimer(){
+  if(tInt)clearInterval(tInt);tInt=null;
+  var el=document.getElementById('timer');if(el)el.className='';
+}
+
+/* ══════════════════════════════════════════════════════════
+   MODAL / TOAST
+   ══════════════════════════════════════════════════════════ */
+function showModal(html){var m=document.getElementById('modal');m.innerHTML=html;m.className='on'}
+function closeModal(){var m=document.getElementById('modal');m.className='';m.innerHTML=''}
+var pending=null;
+function ask(title,body,confirmLabel,fn){
+  pending=fn;
+  var h='<div class="sheet" onclick="event.stopPropagation()">';
+  h+='<h3 style="margin-bottom:6px">'+esc(title)+'</h3><div class="sub" style="margin-bottom:18px">'+esc(body)+'</div>';
+  h+='<div class="row" style="gap:10px"><button class="btn pri grow" onclick="runPending()">'+esc(confirmLabel)+'</button>';
+  h+='<button class="btn ghost grow" onclick="closeModal()">Behåll</button></div></div>';
+  showModal(h);
+}
+function runPending(){var f=pending;pending=null;closeModal();if(f)f()}
+function flash(msg){
+  var d=document.createElement('div');
+  d.textContent=msg;
+  d.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));background:var(--panel2);border:1px solid var(--line2);color:var(--ink);padding:11px 16px;border-radius:999px;z-index:70;font-size:14px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.5)';
+  document.body.appendChild(d);
+  setTimeout(function(){d.remove()},2200);
+}
+
+render();
+boot();
+</script>
+</body>
+</html>
