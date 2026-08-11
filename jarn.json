@@ -123,12 +123,12 @@
     },
     {
      "id": "9blyt40kua",
-     "name": "Benpress",
+     "name": "Hamstring Curls",
      "type": "machine",
-     "sets": 3,
+     "sets": 2,
      "lo": 8,
      "hi": 10,
-     "inc": 10,
+     "inc": 25,
      "rest": 150,
      "fav": 0,
      "note": ""
@@ -688,6 +688,6 @@
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786449495544,
+ "ts": 1786449515557,
  "del": []
 }
