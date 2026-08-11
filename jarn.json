@@ -2,26 +2,38 @@
  "v": 1,
  "routines": [
   {
-   "id": "kn1hpo1kua",
+   "id": "1pxw1r12cm",
    "name": "Överkropp A",
    "short": "ÖA",
    "ex": [
     {
-     "id": "x1rb3lvkua",
-     "name": "Bänkpress",
-     "type": "bar",
-     "sets": 3,
+     "id": "2v3qr6z2cm",
+     "name": "Incline press",
+     "type": "machine",
+     "sets": 2,
      "lo": 6,
      "hi": 8,
-     "inc": 2.5,
+     "inc": 60,
      "rest": 180,
      "fav": 0,
      "note": ""
     },
     {
-     "id": "y4lly93kua",
-     "name": "Skivstångsrodd",
-     "type": "bar",
+     "id": "k08xqlg2cm",
+     "name": "Chest Press",
+     "type": "machine",
+     "sets": 2,
+     "lo": 6,
+     "hi": 8,
+     "inc": 2.5,
+     "rest": 150,
+     "fav": 0,
+     "note": ""
+    },
+    {
+     "id": "3ut0pmx2cm",
+     "name": "Pull Ups",
+     "type": "bw",
      "sets": 3,
      "lo": 6,
      "hi": 8,
@@ -31,74 +43,62 @@
      "note": ""
     },
     {
-     "id": "1nv22p6kua",
-     "name": "Militärpress",
-     "type": "bar",
-     "sets": 3,
-     "lo": 6,
-     "hi": 8,
-     "inc": 2.5,
-     "rest": 150,
-     "fav": 0,
-     "note": ""
-    },
-    {
-     "id": "4brnoxbkua",
-     "name": "Latsdrag",
+     "id": "mwnste62cm",
+     "name": "Bicep Curl dropset",
      "type": "machine",
      "sets": 3,
-     "lo": 6,
-     "hi": 8,
-     "inc": 5,
+     "lo": 10,
+     "hi": 10,
+     "inc": 6.25,
      "rest": 120,
      "fav": 0,
-     "note": ""
+     "note": "+ 1"
     },
     {
-     "id": "e6ga10xkua",
-     "name": "Hantelcurl",
-     "type": "db",
+     "id": "l55ltq42cm",
+     "name": "Tricep overhead",
+     "type": "machine",
      "sets": 3,
-     "lo": 8,
-     "hi": 10,
-     "inc": 2,
+     "lo": 6,
+     "hi": 8,
+     "inc": 12.5,
      "rest": 90,
      "fav": 0,
      "note": ""
     },
     {
-     "id": "5vtdmsukua",
-     "name": "Triceps pushdown",
+     "id": "y33ucq32cm",
+     "name": "Shoulder press",
      "type": "machine",
-     "sets": 3,
-     "lo": 8,
+     "sets": 2,
+     "lo": 10,
      "hi": 10,
-     "inc": 2.5,
-     "rest": 90,
-     "fav": 0,
-     "note": ""
-    },
-    {
-     "id": "9wfl3ykkua",
-     "name": "Face pulls",
-     "type": "machine",
-     "sets": 3,
-     "lo": 12,
-     "hi": 15,
-     "inc": 2.5,
+     "inc": 32.5,
      "rest": 60,
      "fav": 0,
      "note": ""
+    },
+    {
+     "name": "Lat raises",
+     "type": "machine",
+     "sets": 2,
+     "lo": 10,
+     "hi": 10,
+     "inc": 4.75,
+     "rest": 150,
+     "note": "",
+     "fav": 0,
+     "id": "94efty9wnt"
     }
    ]
   },
   {
-   "id": "x5iay40kua",
+   "id": "ylt5hbi2cm",
    "name": "Underkropp A",
    "short": "UA",
    "ex": [
     {
-     "id": "e5b0405kua",
+     "id": "ofy7agc2cm",
      "name": "Knäböj",
      "type": "bar",
      "sets": 3,
@@ -110,7 +110,7 @@
      "note": ""
     },
     {
-     "id": "yp7mwjlkua",
+     "id": "xrgsb2i2cm",
      "name": "Rumänsk marklyft",
      "type": "bar",
      "sets": 3,
@@ -122,7 +122,7 @@
      "note": ""
     },
     {
-     "id": "9blyt40kua",
+     "id": "wv3sw412cm",
      "name": "Benpress",
      "type": "machine",
      "sets": 3,
@@ -134,7 +134,7 @@
      "note": ""
     },
     {
-     "id": "zgec3z5kua",
+     "id": "ve3auvv2cm",
      "name": "Bencurl",
      "type": "machine",
      "sets": 3,
@@ -146,7 +146,7 @@
      "note": ""
     },
     {
-     "id": "i7m9e66kua",
+     "id": "dj6gq3c2cm",
      "name": "Vadpress",
      "type": "machine",
      "sets": 3,
@@ -158,7 +158,7 @@
      "note": ""
     },
     {
-     "id": "o6rl05rkua",
+     "id": "n7l06la2cm",
      "name": "Hanging leg raise",
      "type": "bw",
      "sets": 3,
@@ -172,12 +172,12 @@
    ]
   },
   {
-   "id": "lte83p0kua",
+   "id": "9tv5wv42cm",
    "name": "Överkropp B",
    "short": "ÖB",
    "ex": [
     {
-     "id": "flsti1okua",
+     "id": "kfhttag2cm",
      "name": "Chins",
      "type": "bw",
      "sets": 3,
@@ -189,7 +189,7 @@
      "note": ""
     },
     {
-     "id": "4av2pllkua",
+     "id": "08r6f1s2cm",
      "name": "Lutande hantelpress",
      "type": "db",
      "sets": 3,
@@ -201,7 +201,7 @@
      "note": ""
     },
     {
-     "id": "d62196ckua",
+     "id": "uav4lcw2cm",
      "name": "Hantelrodd",
      "type": "db",
      "sets": 3,
@@ -213,7 +213,7 @@
      "note": ""
     },
     {
-     "id": "bcwuwq2kua",
+     "id": "t8shlxi2cm",
      "name": "Sittande hantelpress",
      "type": "db",
      "sets": 3,
@@ -225,7 +225,7 @@
      "note": ""
     },
     {
-     "id": "c2ipvlikua",
+     "id": "mdc849p2cm",
      "name": "Sidolyft",
      "type": "db",
      "sets": 3,
@@ -237,7 +237,7 @@
      "note": ""
     },
     {
-     "id": "sry0fslkua",
+     "id": "8popmpu2cm",
      "name": "Hammercurl",
      "type": "db",
      "sets": 3,
@@ -249,7 +249,7 @@
      "note": ""
     },
     {
-     "id": "mmpn9ndkua",
+     "id": "ygmvhlx2cm",
      "name": "Dips",
      "type": "bw",
      "sets": 3,
@@ -263,12 +263,12 @@
    ]
   },
   {
-   "id": "a7nh2g1kua",
+   "id": "8rn8i782cm",
    "name": "Underkropp B",
    "short": "UB",
    "ex": [
     {
-     "id": "gpplvmgkua",
+     "id": "7gfrphv2cm",
      "name": "Marklyft",
      "type": "bar",
      "sets": 3,
@@ -280,7 +280,7 @@
      "note": ""
     },
     {
-     "id": "qc5cuopkua",
+     "id": "dogl4z82cm",
      "name": "Frontböj",
      "type": "bar",
      "sets": 3,
@@ -292,7 +292,7 @@
      "note": ""
     },
     {
-     "id": "2fjci4rkua",
+     "id": "j32f81f2cm",
      "name": "Bulgarsk splitsquat",
      "type": "db",
      "sets": 3,
@@ -304,7 +304,7 @@
      "note": ""
     },
     {
-     "id": "bw9umdpkua",
+     "id": "lz9yeg02cm",
      "name": "Benspark",
      "type": "machine",
      "sets": 3,
@@ -316,7 +316,7 @@
      "note": ""
     },
     {
-     "id": "ic9bkilkua",
+     "id": "o39a3ei2cm",
      "name": "Stående vadpress",
      "type": "machine",
      "sets": 3,
@@ -328,7 +328,7 @@
      "note": ""
     },
     {
-     "id": "rrfmlbhkua",
+     "id": "em2sr7p2cm",
      "name": "Pallof press",
      "type": "machine",
      "sets": 3,
@@ -342,12 +342,12 @@
    ]
   },
   {
-   "id": "t6l7rthkua",
+   "id": "qxdoxzl2cm",
    "name": "Calisthenics",
    "short": "CA",
    "ex": [
     {
-     "id": "94z9pyskua",
+     "id": "hff0oti2cm",
      "name": "Pull-ups",
      "type": "bw",
      "sets": 4,
@@ -359,7 +359,7 @@
      "note": ""
     },
     {
-     "id": "045grazkua",
+     "id": "uhi36iw2cm",
      "name": "Dips",
      "type": "bw",
      "sets": 4,
@@ -371,7 +371,7 @@
      "note": ""
     },
     {
-     "id": "drhxyhckua",
+     "id": "89046l12cn",
      "name": "Armhävningar, fötter högt",
      "type": "bw",
      "sets": 4,
@@ -383,7 +383,7 @@
      "note": ""
     },
     {
-     "id": "yvdvif5kua",
+     "id": "89cux5p2cn",
      "name": "Pike push-ups",
      "type": "bw",
      "sets": 3,
@@ -395,7 +395,7 @@
      "note": ""
     },
     {
-     "id": "iospmfrkua",
+     "id": "acce8qc2cn",
      "name": "Australian rows",
      "type": "bw",
      "sets": 3,
@@ -407,7 +407,7 @@
      "note": ""
     },
     {
-     "id": "artkc7lkua",
+     "id": "7t5zwfd2cn",
      "name": "Hollow body hold (sek)",
      "type": "bw",
      "sets": 3,
@@ -419,7 +419,7 @@
      "note": ""
     },
     {
-     "id": "5y12flmkua",
+     "id": "sm8mg4t2cn",
      "name": "L-sit (sek)",
      "type": "bw",
      "sets": 3,
@@ -433,7 +433,138 @@
    ]
   }
  ],
- "sessions": [],
+ "sessions": [
+  {
+   "id": "rou8gtz6g4",
+   "ts": 1786389617380,
+   "rid": "1pxw1r12cm",
+   "rname": "Överkropp A",
+   "date": "2026-08-10",
+   "min": 74,
+   "note": "Bra energi men jag borde äta något mitt i passet",
+   "sets": [
+    {
+     "exId": "2v3qr6z2cm",
+     "name": "Incline press",
+     "i": 1,
+     "w": 60,
+     "r": 6
+    },
+    {
+     "exId": "2v3qr6z2cm",
+     "name": "Incline press",
+     "i": 2,
+     "w": 60,
+     "r": 9
+    },
+    {
+     "exId": "k08xqlg2cm",
+     "name": "Chest Press",
+     "i": 1,
+     "w": 50,
+     "r": 9
+    },
+    {
+     "exId": "k08xqlg2cm",
+     "name": "Chest Press",
+     "i": 2,
+     "w": 55,
+     "r": 11
+    },
+    {
+     "exId": "3ut0pmx2cm",
+     "name": "Pull Ups",
+     "i": 1,
+     "w": 0,
+     "r": 10
+    },
+    {
+     "exId": "3ut0pmx2cm",
+     "name": "Pull Ups",
+     "i": 2,
+     "w": 0,
+     "r": 9
+    },
+    {
+     "exId": "3ut0pmx2cm",
+     "name": "Pull Ups",
+     "i": 3,
+     "w": 0,
+     "r": 8
+    },
+    {
+     "exId": "mwnste62cm",
+     "name": "Bicep Curl dropset",
+     "i": 1,
+     "w": 45,
+     "r": 6
+    },
+    {
+     "exId": "mwnste62cm",
+     "name": "Bicep Curl dropset",
+     "i": 2,
+     "w": 37,
+     "r": 6
+    },
+    {
+     "exId": "mwnste62cm",
+     "name": "Bicep Curl dropset",
+     "i": 3,
+     "w": 30,
+     "r": 7
+    },
+    {
+     "exId": "l55ltq42cm",
+     "name": "Tricep overhead",
+     "i": 1,
+     "w": 12.5,
+     "r": 8
+    },
+    {
+     "exId": "l55ltq42cm",
+     "name": "Tricep overhead",
+     "i": 2,
+     "w": 12.5,
+     "r": 9
+    },
+    {
+     "exId": "l55ltq42cm",
+     "name": "Tricep overhead",
+     "i": 3,
+     "w": 12.5,
+     "r": 11
+    },
+    {
+     "exId": "y33ucq32cm",
+     "name": "Shoulder press",
+     "i": 1,
+     "w": 55,
+     "r": 10
+    },
+    {
+     "exId": "y33ucq32cm",
+     "name": "Shoulder press",
+     "i": 2,
+     "w": 55,
+     "r": 11
+    },
+    {
+     "exId": "94efty9wnt",
+     "name": "Lat raises",
+     "i": 1,
+     "w": 25,
+     "r": 11
+    },
+    {
+     "exId": "94efty9wnt",
+     "name": "Lat raises",
+     "i": 2,
+     "w": 27.5,
+     "r": 12
+    }
+   ]
+  }
+ ],
  "active": null,
  "body": [],
  "food": [],
@@ -447,7 +578,7 @@
  "meta": {
   "lastBackup": 0
  },
- "detail": null,
- "ts": 1786449291378,
- "del": []
+ "del": [],
+ "ts": 1786438865547,
+ "detail": null
 }
