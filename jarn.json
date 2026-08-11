@@ -111,12 +111,12 @@
     },
     {
      "id": "yp7mwjlkua",
-     "name": "Rumänsk marklyft",
-     "type": "bar",
-     "sets": 3,
+     "name": "Leg extensions",
+     "type": "machine",
+     "sets": 2,
      "lo": 8,
-     "hi": 8,
-     "inc": 5,
+     "hi": 10,
+     "inc": 70,
      "rest": 180,
      "fav": 0,
      "note": ""
@@ -688,6 +688,6 @@
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786449473757,
+ "ts": 1786449495544,
  "del": []
 }
