@@ -654,11 +654,11 @@
   "rest": 150,
   "bw": 20
  },
- "view": "train",
+ "view": "body",
  "meta": {
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786449573539,
+ "ts": 1786449589067,
  "del": []
 }
