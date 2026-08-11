@@ -147,11 +147,11 @@
     },
     {
      "id": "o6rl05rkua",
-     "name": "Hanging leg raise",
-     "type": "bw",
+     "name": "Ab machine",
+     "type": "machine",
      "sets": 3,
-     "lo": 8,
-     "hi": 12,
+     "lo": 15,
+     "hi": 20,
      "inc": 0,
      "rest": 90,
      "fav": 0,
@@ -654,11 +654,11 @@
   "rest": 150,
   "bw": 20
  },
- "view": "train",
+ "view": "prog",
  "meta": {
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786449536360,
+ "ts": 1786449557713,
  "del": []
 }
