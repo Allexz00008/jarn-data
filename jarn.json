@@ -2,38 +2,26 @@
  "v": 1,
  "routines": [
   {
-   "id": "1pxw1r12cm",
+   "id": "kn1hpo1kua",
    "name": "Överkropp A",
    "short": "ÖA",
    "ex": [
     {
-     "id": "2v3qr6z2cm",
-     "name": "Incline press",
-     "type": "machine",
-     "sets": 2,
+     "id": "x1rb3lvkua",
+     "name": "Bänkpress",
+     "type": "bar",
+     "sets": 3,
      "lo": 6,
      "hi": 8,
-     "inc": 60,
+     "inc": 2.5,
      "rest": 180,
      "fav": 0,
      "note": ""
     },
     {
-     "id": "k08xqlg2cm",
-     "name": "Chest Press",
-     "type": "machine",
-     "sets": 2,
-     "lo": 6,
-     "hi": 8,
-     "inc": 2.5,
-     "rest": 150,
-     "fav": 0,
-     "note": ""
-    },
-    {
-     "id": "3ut0pmx2cm",
-     "name": "Pull Ups",
-     "type": "bw",
+     "id": "y4lly93kua",
+     "name": "Skivstångsrodd",
+     "type": "bar",
      "sets": 3,
      "lo": 6,
      "hi": 8,
@@ -43,62 +31,74 @@
      "note": ""
     },
     {
-     "id": "mwnste62cm",
-     "name": "Bicep Curl dropset",
+     "id": "1nv22p6kua",
+     "name": "Militärpress",
+     "type": "bar",
+     "sets": 3,
+     "lo": 6,
+     "hi": 8,
+     "inc": 2.5,
+     "rest": 150,
+     "fav": 0,
+     "note": ""
+    },
+    {
+     "id": "4brnoxbkua",
+     "name": "Latsdrag",
      "type": "machine",
      "sets": 3,
-     "lo": 10,
-     "hi": 10,
-     "inc": 6.25,
+     "lo": 6,
+     "hi": 8,
+     "inc": 5,
      "rest": 120,
      "fav": 0,
-     "note": "+ 1"
+     "note": ""
     },
     {
-     "id": "l55ltq42cm",
-     "name": "Tricep overhead",
-     "type": "machine",
+     "id": "e6ga10xkua",
+     "name": "Hantelcurl",
+     "type": "db",
      "sets": 3,
-     "lo": 6,
-     "hi": 8,
-     "inc": 12.5,
+     "lo": 8,
+     "hi": 10,
+     "inc": 2,
      "rest": 90,
      "fav": 0,
      "note": ""
     },
     {
-     "id": "y33ucq32cm",
-     "name": "Shoulder press",
+     "id": "5vtdmsukua",
+     "name": "Triceps pushdown",
      "type": "machine",
-     "sets": 2,
-     "lo": 10,
+     "sets": 3,
+     "lo": 8,
      "hi": 10,
-     "inc": 32.5,
-     "rest": 60,
+     "inc": 2.5,
+     "rest": 90,
      "fav": 0,
      "note": ""
     },
     {
-     "name": "Lat raises",
+     "id": "9wfl3ykkua",
+     "name": "Face pulls",
      "type": "machine",
-     "sets": 2,
-     "lo": 10,
-     "hi": 10,
-     "inc": 4.75,
-     "rest": 150,
-     "note": "",
+     "sets": 3,
+     "lo": 12,
+     "hi": 15,
+     "inc": 2.5,
+     "rest": 60,
      "fav": 0,
-     "id": "94efty9wnt"
+     "note": ""
     }
    ]
   },
   {
-   "id": "ylt5hbi2cm",
+   "id": "x5iay40kua",
    "name": "Underkropp A",
    "short": "UA",
    "ex": [
     {
-     "id": "ofy7agc2cm",
+     "id": "e5b0405kua",
      "name": "Knäböj",
      "type": "bar",
      "sets": 3,
@@ -110,7 +110,7 @@
      "note": ""
     },
     {
-     "id": "xrgsb2i2cm",
+     "id": "yp7mwjlkua",
      "name": "Rumänsk marklyft",
      "type": "bar",
      "sets": 3,
@@ -122,7 +122,7 @@
      "note": ""
     },
     {
-     "id": "wv3sw412cm",
+     "id": "9blyt40kua",
      "name": "Benpress",
      "type": "machine",
      "sets": 3,
@@ -134,7 +134,7 @@
      "note": ""
     },
     {
-     "id": "ve3auvv2cm",
+     "id": "zgec3z5kua",
      "name": "Bencurl",
      "type": "machine",
      "sets": 3,
@@ -146,7 +146,7 @@
      "note": ""
     },
     {
-     "id": "dj6gq3c2cm",
+     "id": "i7m9e66kua",
      "name": "Vadpress",
      "type": "machine",
      "sets": 3,
@@ -158,7 +158,7 @@
      "note": ""
     },
     {
-     "id": "n7l06la2cm",
+     "id": "o6rl05rkua",
      "name": "Hanging leg raise",
      "type": "bw",
      "sets": 3,
@@ -172,12 +172,12 @@
    ]
   },
   {
-   "id": "9tv5wv42cm",
+   "id": "lte83p0kua",
    "name": "Överkropp B",
    "short": "ÖB",
    "ex": [
     {
-     "id": "kfhttag2cm",
+     "id": "flsti1okua",
      "name": "Chins",
      "type": "bw",
      "sets": 3,
@@ -189,7 +189,7 @@
      "note": ""
     },
     {
-     "id": "08r6f1s2cm",
+     "id": "4av2pllkua",
      "name": "Lutande hantelpress",
      "type": "db",
      "sets": 3,
@@ -201,7 +201,7 @@
      "note": ""
     },
     {
-     "id": "uav4lcw2cm",
+     "id": "d62196ckua",
      "name": "Hantelrodd",
      "type": "db",
      "sets": 3,
@@ -213,7 +213,7 @@
      "note": ""
     },
     {
-     "id": "t8shlxi2cm",
+     "id": "bcwuwq2kua",
      "name": "Sittande hantelpress",
      "type": "db",
      "sets": 3,
@@ -225,7 +225,7 @@
      "note": ""
     },
     {
-     "id": "mdc849p2cm",
+     "id": "c2ipvlikua",
      "name": "Sidolyft",
      "type": "db",
      "sets": 3,
@@ -237,7 +237,7 @@
      "note": ""
     },
     {
-     "id": "8popmpu2cm",
+     "id": "sry0fslkua",
      "name": "Hammercurl",
      "type": "db",
      "sets": 3,
@@ -249,7 +249,7 @@
      "note": ""
     },
     {
-     "id": "ygmvhlx2cm",
+     "id": "mmpn9ndkua",
      "name": "Dips",
      "type": "bw",
      "sets": 3,
@@ -263,12 +263,12 @@
    ]
   },
   {
-   "id": "8rn8i782cm",
+   "id": "a7nh2g1kua",
    "name": "Underkropp B",
    "short": "UB",
    "ex": [
     {
-     "id": "7gfrphv2cm",
+     "id": "gpplvmgkua",
      "name": "Marklyft",
      "type": "bar",
      "sets": 3,
@@ -280,7 +280,7 @@
      "note": ""
     },
     {
-     "id": "dogl4z82cm",
+     "id": "qc5cuopkua",
      "name": "Frontböj",
      "type": "bar",
      "sets": 3,
@@ -292,7 +292,7 @@
      "note": ""
     },
     {
-     "id": "j32f81f2cm",
+     "id": "2fjci4rkua",
      "name": "Bulgarsk splitsquat",
      "type": "db",
      "sets": 3,
@@ -304,7 +304,7 @@
      "note": ""
     },
     {
-     "id": "lz9yeg02cm",
+     "id": "bw9umdpkua",
      "name": "Benspark",
      "type": "machine",
      "sets": 3,
@@ -316,7 +316,7 @@
      "note": ""
     },
     {
-     "id": "o39a3ei2cm",
+     "id": "ic9bkilkua",
      "name": "Stående vadpress",
      "type": "machine",
      "sets": 3,
@@ -328,7 +328,7 @@
      "note": ""
     },
     {
-     "id": "em2sr7p2cm",
+     "id": "rrfmlbhkua",
      "name": "Pallof press",
      "type": "machine",
      "sets": 3,
@@ -342,12 +342,12 @@
    ]
   },
   {
-   "id": "qxdoxzl2cm",
+   "id": "t6l7rthkua",
    "name": "Calisthenics",
    "short": "CA",
    "ex": [
     {
-     "id": "hff0oti2cm",
+     "id": "94z9pyskua",
      "name": "Pull-ups",
      "type": "bw",
      "sets": 4,
@@ -359,7 +359,7 @@
      "note": ""
     },
     {
-     "id": "uhi36iw2cm",
+     "id": "045grazkua",
      "name": "Dips",
      "type": "bw",
      "sets": 4,
@@ -371,7 +371,7 @@
      "note": ""
     },
     {
-     "id": "89046l12cn",
+     "id": "drhxyhckua",
      "name": "Armhävningar, fötter högt",
      "type": "bw",
      "sets": 4,
@@ -383,7 +383,7 @@
      "note": ""
     },
     {
-     "id": "89cux5p2cn",
+     "id": "yvdvif5kua",
      "name": "Pike push-ups",
      "type": "bw",
      "sets": 3,
@@ -395,7 +395,7 @@
      "note": ""
     },
     {
-     "id": "acce8qc2cn",
+     "id": "iospmfrkua",
      "name": "Australian rows",
      "type": "bw",
      "sets": 3,
@@ -407,7 +407,7 @@
      "note": ""
     },
     {
-     "id": "7t5zwfd2cn",
+     "id": "artkc7lkua",
      "name": "Hollow body hold (sek)",
      "type": "bw",
      "sets": 3,
@@ -419,7 +419,7 @@
      "note": ""
     },
     {
-     "id": "sm8mg4t2cn",
+     "id": "5y12flmkua",
      "name": "L-sit (sek)",
      "type": "bw",
      "sets": 3,
@@ -565,7 +565,116 @@
    ]
   }
  ],
- "active": null,
+ "active": {
+  "rid": "x5iay40kua",
+  "date": "2026-08-11",
+  "start": 1786449373415,
+  "note": "",
+  "logged": {
+   "e5b0405kua": [
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    }
+   ],
+   "yp7mwjlkua": [
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    }
+   ],
+   "9blyt40kua": [
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    }
+   ],
+   "zgec3z5kua": [
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    }
+   ],
+   "i7m9e66kua": [
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    }
+   ],
+   "o6rl05rkua": [
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    },
+    {
+     "w": "",
+     "r": "",
+     "done": 0
+    }
+   ]
+  }
+ },
  "body": [],
  "food": [],
  "goals": {
@@ -578,7 +687,7 @@
  "meta": {
   "lastBackup": 0
  },
- "del": [],
- "ts": 1786438865547,
- "detail": null
+ "detail": null,
+ "ts": 1786449373415,
+ "del": []
 }
