@@ -214,12 +214,12 @@
     },
     {
      "id": "c2ipvlikua",
-     "name": "Sidolyft",
-     "type": "db",
-     "sets": 3,
+     "name": "Preacher curl",
+     "type": "machine",
+     "sets": 1,
      "lo": 12,
      "hi": 15,
-     "inc": 1,
+     "inc": 39,
      "rest": 60,
      "fav": 0,
      "note": ""
@@ -693,6 +693,6 @@
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786622332940,
+ "ts": 1786622365417,
  "del": []
 }
