@@ -595,9 +595,9 @@
      "done": 1
     },
     {
-     "w": "",
-     "r": "",
-     "done": 0
+     "w": 17.25,
+     "r": 14,
+     "done": 1
     }
    ],
    "4av2pllkua": [
@@ -712,11 +712,11 @@
   "rest": 150,
   "bw": 20
  },
- "view": "prog",
+ "view": "train",
  "meta": {
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786622450788,
+ "ts": 1786622525396,
  "del": []
 }
