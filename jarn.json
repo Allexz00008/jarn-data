@@ -259,6 +259,18 @@
      "note": "",
      "fav": 0,
      "id": "4991x32yui"
+    },
+    {
+     "name": "Rear delts",
+     "type": "machine",
+     "sets": 2,
+     "lo": 8,
+     "hi": 10,
+     "inc": 8.75,
+     "rest": 150,
+     "note": "",
+     "fav": 0,
+     "id": "gcn2agylus"
     }
    ]
   },
@@ -705,6 +717,6 @@
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786622420970,
+ "ts": 1786622450788,
  "del": []
 }
