@@ -247,6 +247,18 @@
      "rest": 120,
      "fav": 0,
      "note": ""
+    },
+    {
+     "name": "Single arm pushdown",
+     "type": "machine",
+     "sets": 3,
+     "lo": 9,
+     "hi": 12,
+     "inc": 7.25,
+     "rest": 150,
+     "note": "",
+     "fav": 0,
+     "id": "4991x32yui"
     }
    ]
   },
@@ -693,6 +705,6 @@
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786622390104,
+ "ts": 1786622420970,
  "del": []
 }
