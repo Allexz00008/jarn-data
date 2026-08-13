@@ -166,15 +166,15 @@
    "ex": [
     {
      "id": "flsti1okua",
-     "name": "Chins",
-     "type": "bw",
+     "name": "Fly press",
+     "type": "machine",
      "sets": 3,
-     "lo": 6,
-     "hi": 8,
-     "inc": 2.5,
+     "lo": 8,
+     "hi": 10,
+     "inc": 17.25,
      "rest": 180,
      "fav": 0,
-     "note": ""
+     "note": "16"
     },
     {
      "id": "4av2pllkua",
@@ -693,6 +693,6 @@
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786621370026,
+ "ts": 1786621412852,
  "del": []
 }
