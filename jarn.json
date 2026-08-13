@@ -190,12 +190,12 @@
     },
     {
      "id": "d62196ckua",
-     "name": "Hantelrodd",
-     "type": "db",
+     "name": "Pulldown",
+     "type": "machine",
      "sets": 3,
      "lo": 8,
      "hi": 8,
-     "inc": 2,
+     "inc": 70,
      "rest": 150,
      "fav": 0,
      "note": ""
@@ -693,6 +693,6 @@
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786622309275,
+ "ts": 1786622332940,
  "del": []
 }
