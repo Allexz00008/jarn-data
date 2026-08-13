@@ -238,12 +238,12 @@
     },
     {
      "id": "mmpn9ndkua",
-     "name": "Dips",
-     "type": "bw",
-     "sets": 3,
+     "name": "Hammer Curl",
+     "type": "machine",
+     "sets": 2,
      "lo": 8,
      "hi": 10,
-     "inc": 2.5,
+     "inc": 18.75,
      "rest": 120,
      "fav": 0,
      "note": ""
@@ -688,11 +688,11 @@
   "rest": 150,
   "bw": 20
  },
- "view": "train",
+ "view": "prog",
  "meta": {
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786622365417,
+ "ts": 1786622390104,
  "del": []
 }
