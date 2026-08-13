@@ -712,11 +712,11 @@
   "rest": 150,
   "bw": 20
  },
- "view": "prog",
+ "view": "train",
  "meta": {
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786622602906,
+ "ts": 1786622613827,
  "del": []
 }
