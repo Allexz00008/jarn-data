@@ -618,11 +618,11 @@
   "rest": 150,
   "bw": 20
  },
- "view": "hist",
+ "view": "train",
  "meta": {
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786955981753,
+ "ts": 1786955990119,
  "del": []
 }
