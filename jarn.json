@@ -575,135 +575,41 @@
      "r": 12
     }
    ]
-  }
- ],
- "active": {
-  "rid": "lte83p0kua",
-  "date": "2026-08-13",
-  "start": 1786621370026,
-  "note": "",
-  "logged": {
-   "flsti1okua": [
+  },
+  {
+   "id": "0ds2nvzeiu",
+   "ts": 1786955985030,
+   "rid": "lte83p0kua",
+   "rname": "Överkropp B",
+   "date": "2026-08-13",
+   "min": 5577,
+   "note": "",
+   "sets": [
     {
+     "exId": "flsti1okua",
+     "name": "Fly press",
+     "i": 1,
      "w": 17.25,
-     "r": 10,
-     "done": 1
+     "r": 10
     },
     {
+     "exId": "flsti1okua",
+     "name": "Fly press",
+     "i": 2,
      "w": 17.25,
-     "r": 11,
-     "done": 1
+     "r": 11
     },
     {
+     "exId": "flsti1okua",
+     "name": "Fly press",
+     "i": 3,
      "w": 17.25,
-     "r": 14,
-     "done": 1
-    }
-   ],
-   "4av2pllkua": [
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    }
-   ],
-   "d62196ckua": [
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    }
-   ],
-   "bcwuwq2kua": [
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    }
-   ],
-   "c2ipvlikua": [
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    }
-   ],
-   "sry0fslkua": [
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    }
-   ],
-   "mmpn9ndkua": [
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
-    },
-    {
-     "w": "",
-     "r": "",
-     "done": 0
+     "r": 14
     }
    ]
   }
- },
+ ],
+ "active": null,
  "body": [],
  "food": [],
  "goals": {
@@ -717,6 +623,6 @@
   "lastBackup": 0
  },
  "detail": null,
- "ts": 1786625056752,
+ "ts": 1786955981753,
  "del": []
 }
